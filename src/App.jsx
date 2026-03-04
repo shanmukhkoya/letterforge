@@ -384,44 +384,7 @@ export default function App() {
           </div>
         )}
 
-        {/* How to monetize guide */}
-        <div style={{
-          maxWidth: 640,
-          margin: "50px auto 0",
-          padding: "0 20px",
-        }}>
-          <div style={{
-            background: "#0a0a0a",
-            border: "1px dashed #222",
-            borderRadius: "16px",
-            padding: "28px",
-          }}>
-            <p style={{ color: "#444", fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 14 }}>
-              🛠 Your monetization roadmap
-            </p>
-            {[
-              ["1. Add Razorpay", "Go to razorpay.com → sign up (instant approval) → Payment Pages → create a ₹750/mo or $9/mo plan → copy the link → paste it as RAZORPAY_PAYMENT_LINK in the code. Takes 15 min."],
-              ["2. Deploy free", "Push to Vercel (vercel.com) — free tier, instant deploy, custom domain. Connect GitHub repo."],
-              ["3. Get first users", "Post in r/jobs, r/cscareerquestions, LinkedIn. 'I built a free cover letter tool' posts go viral easily."],
-              ["4. SEO", "Write 5 blog posts: 'cover letter for [job type]'. Free traffic in 3–6 months."],
-              ["5. Scale", "Add resume rewriter, LinkedIn optimizer. Raise price to $19/mo. Repeat."],
-            ].map(([title, desc]) => (
-              <div key={title} style={{ display: "flex", gap: 14, marginBottom: 16 }}>
-                <div style={{
-                  minWidth: 28, height: 28,
-                  background: "#151515", border: "1px solid #252525",
-                  borderRadius: "6px",
-                  display: "flex", alignItems: "center", justifyContent: "center",
-                  fontSize: "0.7rem", color: "#00ff87", fontWeight: 800,
-                }}>→</div>
-                <div>
-                  <div style={{ color: "#ccc", fontWeight: 700, fontSize: "0.85rem", marginBottom: 3 }}>{title}</div>
-                  <div style={{ color: "#555", fontSize: "0.8rem", lineHeight: 1.5 }}>{desc}</div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+
       </div>
     </>
   );
