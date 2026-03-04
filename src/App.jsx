@@ -1,7 +1,5 @@
 import { useState } from "react";
 
-const ANTHROPIC_MODEL = "claude-sonnet-4-20250514";
-
 // ─── Payment gate (Razorpay) ─────────────────────────────────────────────────
 // After creating your Razorpay Payment Page, paste your link here:
 const RAZORPAY_PAYMENT_LINK = "https://razorpay.me/@shanmukhkoya";
@@ -16,27 +14,14 @@ function useFreeUsage() {
 
 // ─── AI call ─────────────────────────────────────────────────────────────────
 async function generateCoverLetter({ jobTitle, company, jobDesc, resumeBlurb, tone }) {
-  const prompt = `You are an expert career coach. Write a compelling, personalized cover letter.
-
-Job Title: ${jobTitle}
-Company: ${company}
-Job Description: ${jobDesc}
-Candidate background: ${resumeBlurb}
-Tone: ${tone}
-
-Write a 3-paragraph cover letter (opening hook, value proposition, closing CTA). Make it specific, human, and NOT generic. No placeholders. Output ONLY the cover letter text.`;
-
-  const res = await fetch("https://api.anthropic.com/v1/messages", {
+  const res = await fetch("/api/generate", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      model: ANTHROPIC_MODEL,
-      max_tokens: 1000,
-      messages: [{ role: "user", content: prompt }],
-    }),
+    body: JSON.stringify({ jobTitle, company, jobDesc, resumeBlurb, tone }),
   });
   const data = await res.json();
-  return data.content?.[0]?.text ?? "Error generating letter.";
+  if (data.error) throw new Error(data.error);
+  return data.result;
 }
 
 // ─── Components ───────────────────────────────────────────────────────────────
@@ -202,7 +187,7 @@ export default function App() {
             <span style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700, fontSize: "1.1rem", color: "#fff" }}>
               LetterForge
             </span>
-            <Badge>Beta</Badge>
+          
           </div>
           <button
             onClick={() => window.open(RAZORPAY_PAYMENT_LINK, "_blank")}
